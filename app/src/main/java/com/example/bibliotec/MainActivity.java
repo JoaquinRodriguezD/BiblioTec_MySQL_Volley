@@ -55,15 +55,13 @@ public class MainActivity extends AppCompatActivity {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    //JSONObject jsonObject = new JSONObject(response);
-                    //String success = jsonObject.getString("success");
                     if (response.equals("exito")) {
                         Toast.makeText(MainActivity.this, "Ingreso correcto", Toast.LENGTH_LONG).show();
                         Intent i = new Intent(MainActivity.this, Inicio.class);
                         startActivity(i);
                         //finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Error: usuario o contraseña es incorrecta", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Error: usuario o contraseña es incorrecta", Toast.LENGTH_SHORT).show();
                     }
                 }
             }, new Response.ErrorListener() {

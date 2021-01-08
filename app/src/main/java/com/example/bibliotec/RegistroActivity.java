@@ -50,25 +50,30 @@ public class RegistroActivity extends AppCompatActivity {
         final String direccion = this.dir.getText().toString();
         final String correo = this.corr.getText().toString().trim();
         final String contra = this.pass.getText().toString();
+        if (nombre.equals("") || apellido_p.equals("") || apellido_m.equals("") || telefono.equals("") || direccion.equals("") || correo.equals("") || contra.equals("")) {
 
+            nom.setError("Error: Campo vacio!");
+            ap.setError("Error: Campo vacio!");
+            am.setError("Error: Campo vacio!");
+            tel.setError("Error: Campo vacio!");
+            dir.setError("Error: Campo vacio!");
+            corr.setError("Error: Campo vacio!");
+            pass.setError("Error: Campo vacio!");
+        }
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String success = jsonObject.getString("success");
-                    if (success.equals("1")) {
-                        Toast.makeText(RegistroActivity.this, "Nuevo usuario ingresado correctamente", Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(RegistroActivity.this, "Error: " + e.toString(), Toast.LENGTH_LONG).show();
+                if(response.equals("exito")){
+                    Toast.makeText(RegistroActivity.this, "Nuevo usuario ingresado correctamente", Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(RegistroActivity.this, "Error: usuario o contraseña es incorrecta", Toast.LENGTH_SHORT).show();
                 }
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(RegistroActivity.this, "Error comunicación", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistroActivity.this, "Error: De comunicación" + error.toString(), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
