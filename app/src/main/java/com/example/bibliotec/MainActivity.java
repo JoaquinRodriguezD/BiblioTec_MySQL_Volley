@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,23 +43,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View view) {
 
-        String user = usr.getText().toString();
-        String password = passwd.getText().toString();
+        final String user = this.usr.getText().toString();
+        final String pass = this.passwd.getText().toString();
 
-        if (user.isEmpty() || password.isEmpty()) {
+        if (user.isEmpty() || pass.isEmpty()) {
 
             Toast.makeText(getApplicationContext(), "Error: No puedes dejar los campos vacios", Toast.LENGTH_SHORT).show();
 
         } else {
-            final String correo = this.usr.getText().toString();
-            final String contra = this.passwd.getText().toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //JSONObject jsonObject = new JSONObject(response);
                     //String success = jsonObject.getString("success");
-                    if (response.equals("1")) {
+                    if (response.equals("exito")) {
                         Toast.makeText(MainActivity.this, "Ingreso correcto", Toast.LENGTH_LONG).show();
                         Intent i = new Intent(MainActivity.this, Inicio.class);
                         startActivity(i);
@@ -75,11 +75,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
-                    params.put("correo", correo);
-                    params.put("contra", contra);
+                    params.put("user", user);
+                    params.put("pass", pass);
                     return params;
                 }
             };
+            RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+            requestQueue.add(stringRequest);
         }
     }
 
