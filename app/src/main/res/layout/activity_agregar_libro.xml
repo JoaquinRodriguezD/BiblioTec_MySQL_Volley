@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".RegistroActivity">
+    tools:context=".AgregarLibro">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registro de Alumno"
+        android:text="Registro de Libro"
         android:textColor="@android:color/background_dark"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,13 +21,13 @@
         app:layout_constraintVertical_bias="0.12" />
 
     <EditText
-        android:id="@+id/nombre"
+        android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@android:color/background_light"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="Titulo"
         android:inputType="text"
         android:text=""
         android:textColor="@android:color/background_dark"
@@ -39,13 +39,13 @@
         app:layout_constraintVertical_bias="0.3" />
 
     <EditText
-        android:id="@+id/ap"
+        android:id="@+id/autor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@android:color/background_light"
         android:ems="10"
-        android:hint="Apellido paterno"
+        android:hint="Autor"
         android:inputType="text"
         android:text=""
         android:textColor="@android:color/background_dark"
@@ -57,13 +57,13 @@
         app:layout_constraintVertical_bias="0.35" />
 
     <EditText
-        android:id="@+id/am"
+        android:id="@+id/editorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@android:color/background_light"
         android:ems="10"
-        android:hint="Apellido materno"
+        android:hint="Editorial"
         android:inputType="text"
         android:text=""
         android:textColor="@android:color/background_dark"
@@ -75,14 +75,14 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <EditText
-        android:id="@+id/telefono"
+        android:id="@+id/edicion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@android:color/background_light"
         android:ems="10"
-        android:hint="Telefono"
-        android:inputType="number"
+        android:hint="Edicion"
+        android:inputType="text"
         android:text=""
         android:textColor="@android:color/background_dark"
         android:textColorHint="@android:color/darker_gray"
@@ -93,33 +93,31 @@
         app:layout_constraintVertical_bias="0.45" />
 
     <EditText
-        android:id="@+id/direccion"
+        android:id="@+id/isbn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@android:color/background_light"
         android:ems="10"
-        android:hint="Dirección"
+        android:hint="ISBN"
         android:inputType="text"
-        android:text=""
         android:textColor="@android:color/background_dark"
         android:textColorHint="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
-        android:id="@+id/correo"
+        android:id="@+id/fechapub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@android:color/background_light"
         android:ems="10"
-        android:hint="Correo"
-        android:inputType="text"
-        android:text=""
+        android:hint="Fecha de publicacón"
+        android:inputType="date"
         android:textColor="@android:color/background_dark"
         android:textColorHint="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -129,33 +127,66 @@
         app:layout_constraintVertical_bias="0.55" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/descripcion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@android:color/background_light"
         android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
+        android:hint="Descripción"
+        android:inputType="text"
         android:textColor="@android:color/background_dark"
         android:textColorHint="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6"/>
+        app:layout_constraintVertical_bias="0.6" />
+
+    <EditText
+        android:id="@+id/estado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:background="@android:color/background_light"
+        android:ems="10"
+        android:hint="Estado físico"
+        android:inputType="text"
+        android:textColor="@android:color/background_dark"
+        android:textColorHint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <EditText
+        android:id="@+id/reserva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:background="@android:color/background_light"
+        android:ems="10"
+        android:hint="Cantidad"
+        android:inputType="number"
+        android:textColor="@android:color/background_dark"
+        android:textColorHint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7" />
 
     <Button
-        android:id="@+id/register"
+        android:id="@+id/registerL"
         android:layout_width="120dp"
         android:layout_height="60dp"
-        android:onClick="Registrar"
+        android:onClick="RegistrarL"
         android:text="Registrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.85" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
