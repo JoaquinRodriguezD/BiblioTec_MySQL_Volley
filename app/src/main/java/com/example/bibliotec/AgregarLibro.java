@@ -62,37 +62,40 @@ public class AgregarLibro extends AppCompatActivity {
             desc.setError("Error: Campo vacio!");
             est.setError("Error: Campo vacio!");
             rese.setError("Error: Campo vacio!");
-        }
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            public void onResponse(String response) {
-                if (response.equals("exito")) {
-                    Toast.makeText(AgregarLibro.this, "Nuevo libro agregado correctamente", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(AgregarLibro.this, "Error: el libro no se agrego correctamente", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                public void onResponse(String response) {
+                    if (response.equals("exito")) {
+                        Toast.makeText(AgregarLibro.this, "Nuevo libro agregado correctamente", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(AgregarLibro.this, "Error: el libro no se agrego correctamente", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
+            }, new Response.ErrorListener() {
 
-            }
-        }, new Response.ErrorListener() {
-
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(AgregarLibro.this, "Error: De comunicación" + error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("titulo", titulo);
-                params.put("autor", autor);
-                params.put("editorial", editorial);
-                params.put("edicion", edicion);
-                params.put("isbn", isbn);
-                params.put("fechapu", fechapu);
-                params.put("descripcion", descripcion);
-                params.put("estado", estado);
-                params.put("reserva", reserva);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(AgregarLibro.this);
-        requestQueue.add(stringRequest);
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(AgregarLibro.this, "Error: De comunicación" + error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("titulo", titulo);
+                    params.put("autor", autor);
+                    params.put("editorial", editorial);
+                    params.put("edicion", edicion);
+                    params.put("isbn", isbn);
+                    params.put("fechapu", fechapu);
+                    params.put("descripcion", descripcion);
+                    params.put("estado", estado);
+                    params.put("reserva", reserva);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(AgregarLibro.this);
+            requestQueue.add(stringRequest);
+        }
     }
 }

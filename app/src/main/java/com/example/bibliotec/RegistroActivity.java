@@ -2,6 +2,7 @@ package com.example.bibliotec;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -59,38 +60,42 @@ public class RegistroActivity extends AppCompatActivity {
             dir.setError("Error: Campo vacio!");
             corr.setError("Error: Campo vacio!");
             pass.setError("Error: Campo vacio!");
-        }
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if(response.equals("exito")){
-                    Toast.makeText(RegistroActivity.this, "Nuevo usuario ingresado correctamente", Toast.LENGTH_LONG).show();
-                }else {
-                    Toast.makeText(RegistroActivity.this, "Error: usuario o contraseña es incorrecta", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (response.equals("exito")) {
+                        Toast.makeText(RegistroActivity.this, "Nuevo usuario ingresado correctamente", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(RegistroActivity.this, MainActivity.class);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(RegistroActivity.this, "Error: usuario o contraseña es incorrecta", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(RegistroActivity.this, "Error: De comunicación" + error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("nombre", nombre);
-                params.put("apellido_p", apellido_p);
-                params.put("apellido_m", apellido_m);
-                params.put("telefono", telefono);
-                params.put("direccion", direccion);
-                params.put("correo", correo);
-                params.put("contra", contra);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(RegistroActivity.this);
-        requestQueue.add(stringRequest);
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(RegistroActivity.this, "Error: De comunicación" + error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("nombre", nombre);
+                    params.put("apellido_p", apellido_p);
+                    params.put("apellido_m", apellido_m);
+                    params.put("telefono", telefono);
+                    params.put("direccion", direccion);
+                    params.put("correo", correo);
+                    params.put("contra", contra);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(RegistroActivity.this);
+            requestQueue.add(stringRequest);
+        }
     }
-
 }
