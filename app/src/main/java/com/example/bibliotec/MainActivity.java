@@ -22,9 +22,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
     EditText usr, passwd;
     TextView aqui;
     Switch switch1;
+    public static final String EXTRA_TEXT = "com.example.application.example.EXTRA_TEXT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                         if (response.equals("exito")) {
                             Toast.makeText(MainActivity.this, "Ingreso correcto", Toast.LENGTH_LONG).show();
                             Intent i = new Intent(MainActivity.this, Inicio.class);
+                            i.putExtra(EXTRA_TEXT, user);
                             startActivity(i);
                             //finish();
                         } else {

@@ -2,6 +2,7 @@ package com.example.bibliotec;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -42,7 +43,7 @@ public class RegistroEmpleado extends AppCompatActivity {
         final String correo = this.corr.getText().toString().trim();
         final String contra = this.pass.getText().toString();
         final String codigo = this.cod.getText().toString();
-        if (nombre.equals("") || apellido_p.equals("") || apellido_m.equals("") ||  correo.equals("") || contra.equals("")|| cod.equals("amigos")) {
+        if (nombre.equals("") || apellido_p.equals("") || apellido_m.equals("") || correo.equals("") || contra.equals("") || cod.equals("") || cod.equals("amigos")) {
 
             nom.setError("Error: Campo vacio!");
             ap.setError("Error: Campo vacio!");
@@ -50,35 +51,39 @@ public class RegistroEmpleado extends AppCompatActivity {
             corr.setError("Error: Campo vacio!");
             pass.setError("Error: Campo vacio!");
             cod.setError("Error");
-        }
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if(response.equals("exito")){
-                    Toast.makeText(RegistroEmpleado.this, "Nuevo empleado ingresado correctamente", Toast.LENGTH_LONG).show();
-                }else {
-                    Toast.makeText(RegistroEmpleado.this, "Error: usuario o contraseña es incorrecta", Toast.LENGTH_SHORT).show();
-                }
+        } else {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (response.equals("exito")) {
+                        Toast.makeText(RegistroEmpleado.this, "Nuevo empleado ingresado correctamente", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(RegistroEmpleado.this, MainActivity.class);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(RegistroEmpleado.this, "Error: usuario o contraseña es incorrecta", Toast.LENGTH_SHORT).show();
+                    }
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(RegistroEmpleado.this, "Error: De comunicación" + error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("nombre", nombre);
-                params.put("apellido_p", apellido_p);
-                params.put("apellido_m", apellido_m);
-                params.put("correo", correo);
-                params.put("contra", contra);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(RegistroEmpleado.this);
-        requestQueue.add(stringRequest);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(RegistroEmpleado.this, "Error: De comunicación" + error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("nombre", nombre);
+                    params.put("apellido_p", apellido_p);
+                    params.put("apellido_m", apellido_m);
+                    params.put("correo", correo);
+                    params.put("contra", contra);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(RegistroEmpleado.this);
+            requestQueue.add(stringRequest);
+        }
+
     }
 }
