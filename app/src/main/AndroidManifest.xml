@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BiblioTec_MySQL_Volley">
-        <activity android:name=".AgregarLibro"></activity>
+        <activity android:name=".VerLibros"></activity>
+        <activity android:name=".AgregarLibro" />
         <activity android:name=".RegistroEmpleado" />
         <activity android:name=".Inicio" />
         <activity android:name=".RegistroActivity" />

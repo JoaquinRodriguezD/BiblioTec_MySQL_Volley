@@ -7,20 +7,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-public class Adapter extends RecyclerView.Adapter<Adapter.PlayerViewholder> {
+public class LibrosAdapter extends RecyclerView.Adapter<LibrosAdapter.PlayerViewholder> {
 
 
     private final Context mCtx;
-    private final List<Prestamos> productosList;
+    private final List<Libros> productosList;
 
-    public Adapter(Context mCtx, List<Prestamos> productosList) {
+    public LibrosAdapter(Context mCtx, List<Libros> productosList) {
         this.mCtx = mCtx;
         this.productosList = productosList;
     }
@@ -29,20 +29,21 @@ public class Adapter extends RecyclerView.Adapter<Adapter.PlayerViewholder> {
     @Override
     public PlayerViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.lista, null);
+        View view = inflater.inflate(R.layout.libros_disponibles, null);
         return new PlayerViewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PlayerViewholder holder, int position) {
-        Prestamos productos = productosList.get(position);
+        Libros productos = productosList.get(position);
 
         Glide.with(mCtx)
                 .load(productos.getImagen())
-                .into(holder.img);
-        holder.tv1.setText(productos.getTitulo());
-        holder.tv2.setText(productos.getFecha_prestamo());
-        holder.tv3.setText(productos.getFecha_devolucion());
+                .into(holder.im);
+        holder.c1.setText(productos.getTitulo());
+        holder.c2.setText(productos.getAutor());
+        holder.c3.setText(productos.getEditorial());
+        holder.c4.setText(productos.getDescripcion());
 
     }
 
@@ -55,18 +56,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.PlayerViewholder> {
 
     class PlayerViewholder extends RecyclerView.ViewHolder {
 
-        TextView tv1, tv2, tv3;
-        ImageView img;
+        TextView c1, c2, c3, c4;
+        ImageView im;
 
         public PlayerViewholder(@NonNull View itemView) {
 
 
             super(itemView);
 
-            tv1 = itemView.findViewById(R.id.tv1);
-            tv2 = itemView.findViewById(R.id.tv2);
-            tv3 = itemView.findViewById(R.id.tv3);
-            img = itemView.findViewById(R.id.img);
+            c1 = itemView.findViewById(R.id.c1);
+            c2 = itemView.findViewById(R.id.c2);
+            c3 = itemView.findViewById(R.id.c3);
+            c4 = itemView.findViewById(R.id.c4);
+            im = itemView.findViewById(R.id.im);
         }
     }
 }

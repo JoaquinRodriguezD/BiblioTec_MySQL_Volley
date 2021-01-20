@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -25,24 +26,29 @@ public class Inicio extends AppCompatActivity {
 
     List<Prestamos> productosList;
     RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
         Intent intent = getIntent();
-        String usuario = intent.getStringExtra(MainActivity.EXTRA_TEXT);
-        String url = "http://192.168.1.3/bibliotec/inicio.php?correo=" + usuario.trim();
+        String url = "http://192.168.1.3/bibliotec/inicio.php?correo=" + intent.getStringExtra(MainActivity.EXTRA_TEXT).trim();
 
         recyclerView = findViewById(R.id.re);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        productosList=new ArrayList<>();
+        productosList = new ArrayList<>();
         loader(url);
     }
-    private void loader(String url) {
 
-        StringRequest stringRequest=new StringRequest(Request.Method.GET, url,
+    public void Ver(View view) {
+        Intent i = new Intent(Inicio.this, VerLibros.class);
+        startActivity(i);
+    }
+
+    private void loader(String url) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
